@@ -4,7 +4,11 @@ package Java.Controllers;
  * Sample Skeleton for 'Configuration.fxml' Controller Class
  */
 
+import Java.Objects.MuleGame;
+import Java.Objects.Player;
+import Java.Objects.Map;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -46,13 +50,26 @@ public class ConfigurationController {
         startGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("---NEW MULE GAME---");
-                System.out.println("MAP: " + selectMap.getValue());
-                System.out.println("PLAYERS: " +  selectPlayers.getValue());
-                System.out.println("DIFFICULTY: " + selectDifficulty.getValue());
+                Player[] players = createPlayers();
+                Map map = new Map();
+                MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
+                System.out.println(muleGame.difficulty);
+                System.out.println(Arrays.toString(muleGame.players));
+
 
             }
         });
 
+    }
+    public Player[] createPlayers() {
+        Player[] players = new Player[selectPlayers.getValue()];
+        for (int x = 0; x < selectPlayers.getValue(); x++) {
+            players[x] = generatePlayer(x + 1);
+        }
+        return players;
+    }
+
+    public Player generatePlayer(int playerNumber) {
+        return new Player("Player " + playerNumber, "Human", selectDifficulty.getValue());
     }
 }
