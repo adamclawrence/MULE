@@ -9,7 +9,6 @@ public class Player {
 
     public String name;
     public String race;
-    public String difficulty;
     public int food;
     public int energy;
     public int ore;
@@ -22,7 +21,6 @@ public class Player {
     public Player(String name, String race, String difficulty) {
         this.name = name;
         this.race  = race;
-        this.difficulty = difficulty;
         if (Objects.equals(difficulty, "Beginner")) {
             food = 8;
             energy = 4;

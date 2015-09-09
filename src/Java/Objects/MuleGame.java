@@ -8,12 +8,11 @@ public class MuleGame {
     public Player[] players;
     public String difficulty;
     public Map map;
-    public int numberOfPlayers;
 
-    public MuleGame(String difficulty, Map map, int numberOfPlayers) {
+    public MuleGame(String difficulty, Map map, Player[] players ) {
         this.difficulty = difficulty;
         this.map = map;
-        this.numberOfPlayers = numberOfPlayers;
+        this.players = players;
 
     }
 
