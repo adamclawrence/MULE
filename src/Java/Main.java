@@ -7,13 +7,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    Stage currentStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+        currentStage = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("Configuration.fxml"));
+        //Parent addPlayer = FXMLLoader.load(getClass().getResource("AddPlayer.fxml"));
+        currentStage.setTitle("NightHawks M.U.L.E");
+        currentStage.setScene(new Scene(root, 600, 400));
+        currentStage.show();
+
     }
 
 
