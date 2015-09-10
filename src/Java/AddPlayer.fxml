@@ -66,7 +66,7 @@
                      </children>
                   </VBox>
                   <ColorPicker fx:id="colorPicker" prefHeight="34.0" prefWidth="103.0" promptText="Select a Color for your Player" />
-                  <Button fx:id="finishPlayer" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" text="Continue...">
+                  <Button fx:id="finishPlayer" mnemonicParsing="false" onAction="#addPlayer" prefHeight="34.0" prefWidth="88.0" text="Add Player">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
