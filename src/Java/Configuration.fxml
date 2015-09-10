@@ -39,7 +39,7 @@
                         </ChoiceBox>
                      </children>
                   </VBox>
-                  <Button fx:id="startGame" layoutX="295.0" layoutY="157.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="131.0" text="Start Game!" />
+                  <Button fx:id="startGame" layoutX="295.0" layoutY="157.0" mnemonicParsing="false" onAction="#switchToPlayers" prefHeight="84.0" prefWidth="131.0" text="Start Game!" />
                </children>
             </AnchorPane>
         </items>

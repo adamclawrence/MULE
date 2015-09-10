@@ -7,6 +7,8 @@ package Java.Controllers;
 import Java.Objects.MuleGame;
 import Java.Objects.Player;
 import Java.Objects.Map;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -14,10 +16,15 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class ConfigurationController {
+
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -47,18 +54,30 @@ public class ConfigurationController {
         selectPlayers.getItems().addAll(1,2,3,4);
         selectDifficulty.getItems().addAll("Beginner");
         selectDifficulty.getSelectionModel().selectFirst();
-        startGame.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Player[] players = createPlayers();
-                Map map = new Map();
-                MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
-                System.out.println(muleGame.difficulty);
-                System.out.println(Arrays.toString(muleGame.players));
+//        startGame.setOnAction(new EventHandler<ActionEvent>() {
+//            switchToPlayers(EventHandler<ActionEvent>);
+//        });
+
+    }
+
+    public void switchToPlayers(ActionEvent event) throws IOException {
+
+        Stage stage;
+        Parent root;
+        stage=(Stage) startGame.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("/Java/AddPlayer.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
 
-            }
-        });
+
+        Player[] players = createPlayers();
+        Map map = new Map();
+        MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
+        System.out.println(muleGame.difficulty);
+        System.out.println(Arrays.toString(muleGame.players));
+
 
     }
     public Player[] createPlayers() {
