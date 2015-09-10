@@ -46,6 +46,8 @@ public class ConfigurationController implements Initializable{
         selectPlayers.getItems().addAll(1,2,3,4);
         selectDifficulty.getItems().addAll("Beginner");
         selectDifficulty.getSelectionModel().selectFirst();
+        selectMap.getSelectionModel().selectFirst();
+        selectPlayers.getSelectionModel().selectFirst();
     }
 
     public void switchToPlayers(ActionEvent event) throws IOException {
