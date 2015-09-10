@@ -7,12 +7,10 @@ package Java.Controllers;
 import Java.Objects.MuleGame;
 import Java.Objects.Player;
 import Java.Objects.Map;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,14 +21,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ConfigurationController {
+public class ConfigurationController implements Initializable{
 
-
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
-
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+//    @FXML // ResourceBundle that was given to the FXMLLoader
+//    private ResourceBundle resources;
+//
+//    @FXML // URL location of the FXML file that was given to the FXMLLoader
+//    private URL location;
 
     @FXML // fx:id="selectPlayers"
     private ChoiceBox<Integer> selectPlayers; // Value injected by FXMLLoader
@@ -39,54 +36,36 @@ public class ConfigurationController {
     private ChoiceBox<String> selectMap; // Value injected by FXMLLoader
 
     @FXML
-    private ChoiceBox<String> selectDifficulty;
+    public ChoiceBox<String> selectDifficulty;
 
     @FXML // fx:id="startGame"
     private Button startGame; // Value injected by FXMLLoader
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-        assert selectPlayers != null : "fx:id=\"selectPlayers\" was not injected: check your FXML file 'Configuration.fxml'.";
-        assert selectMap != null : "fx:id=\"selectMap\" was not injected: check your FXML file 'Configuration.fxml'.";
-        assert startGame != null : "fx:id=\"startGame\" was not injected: check your FXML file 'Configuration.fxml'.";
-        assert selectDifficulty != null: "fx:id=\"startGame\" was not injected: check your FXML file 'Configuration.fxml'.";
+    public void initialize(URL url, ResourceBundle rb) {
         selectMap.getItems().addAll("Map1", "Map2", "Map3");
         selectPlayers.getItems().addAll(1,2,3,4);
         selectDifficulty.getItems().addAll("Beginner");
         selectDifficulty.getSelectionModel().selectFirst();
-//        startGame.setOnAction(new EventHandler<ActionEvent>() {
-//            switchToPlayers(EventHandler<ActionEvent>);
-//        });
-
     }
 
     public void switchToPlayers(ActionEvent event) throws IOException {
-
-        Stage stage;
-        Parent root;
-        stage=(Stage) startGame.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/Java/AddPlayer.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-
-
-        Player[] players = createPlayers();
-        Map map = new Map();
-        MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
-        System.out.println(muleGame.difficulty);
-        System.out.println(Arrays.toString(muleGame.players));
-
-
-    }
-    public Player[] createPlayers() {
         Player[] players = new Player[selectPlayers.getValue()];
-        for (int x = 0; x < selectPlayers.getValue(); x++) {
-            players[x] = generatePlayer(x + 1);
-        }
-        return players;
+        Map map = new Map(selectMap.getValue());
+        MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Java/AddPlayer.fxml"));
+        loader.load();
+        Parent p = loader.getRoot();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(p));
+        AddPlayerController addPlayerController = loader.getController();
+        addPlayerController.setMuleGame(muleGame);
+        stage.show();
     }
+
 
     public Player generatePlayer(int playerNumber) {
         return new Player("Player " + playerNumber, "Human", selectDifficulty.getValue());

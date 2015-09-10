@@ -1,15 +1,17 @@
 package Java.Controllers;
-
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import Java.Objects.Player;
+import Java.Objects.MuleGame;
+import javafx.scene.text.Text;
 
 /**
  * Created by AveryDingler on 9/9/15.
  */
-public class AddPlayerController {
+public class AddPlayerController implements Initializable{
     @FXML
     public ToggleGroup raceGroup;
     @FXML
@@ -18,15 +20,29 @@ public class AddPlayerController {
     public Button finishPlayer;
     @FXML
     public Label playerNumber;
+    @FXML
+    public Text currentMap;
+    @FXML
+    public Text currentDifficulty;
+    @FXML
+    public ListView addedPlayers;
+    @FXML
+    private TextField newName;
+
+    private MuleGame muleGame;
+
 
     @FXML
-    void initialize() {
-        assert playerNumber != null : "fx:id=\"playerNumber\" was not injected: check your FXML file 'AddPlayer.fxml'.";
-        assert raceGroup != null : "fx:id=\"raceGroup\" was not injected: check your FXML file 'AddPlayer.fxml'.";
-        assert colorPicker != null : "fx:id=\"colorPicker\" was not injected: check your FXML file 'AddPlayer.fxml'.";
-        assert finishPlayer != null : "fx:id=\"finishPlayer\" was not injected: check your FXML file 'AddPlayer.fxml'.";
-
+    public void initialize(URL url, ResourceBundle rb) {
     }
+
+    public void setMuleGame(MuleGame muleGame) {
+        //Helpful Video https://www.youtube.com/watch?v=Vh7XDjWlm_w
+        currentDifficulty.setText(muleGame.getDifficulty());
+        currentMap.setText(muleGame.getMap().getName());
+        this.muleGame = muleGame;
+    }
+
 }
 
 
