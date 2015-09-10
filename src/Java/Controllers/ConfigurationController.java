@@ -9,10 +9,8 @@ import Java.Objects.Player;
 import Java.Objects.Map;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -20,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class ConfigurationController implements Initializable{
 
@@ -54,11 +53,12 @@ public class ConfigurationController implements Initializable{
         Map map = new Map(selectMap.getValue());
         MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
 
+        //((Node)event.getSource()).getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Java/AddPlayer.fxml"));
         loader.load();
         Parent p = loader.getRoot();
-
+        ((Node)event.getSource()).getScene().getWindow().hide();
         Stage stage = new Stage();
         stage.setScene(new Scene(p));
         AddPlayerController addPlayerController = loader.getController();
