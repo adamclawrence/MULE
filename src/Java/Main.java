@@ -1,5 +1,6 @@
 package Java;
 
+import Java.Objects.Map;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,11 +18,17 @@ public class Main extends Application {
         currentStage.setTitle("NightHawks M.U.L.E");
         currentStage.setScene(new Scene(root, 600, 400));
         currentStage.show();
-
     }
 
 
     public static void main(String[] args) {
         launch(args);
+        Main main = new Main();
+        main.run();
+    }
+
+    public void run() {
+        Map map = new Map("map");
+        map.printTiles();
     }
 }
