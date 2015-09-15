@@ -28,7 +28,7 @@ public class Main extends Application {
     }
 
     public void run() {
-        Map map = new Map("map");
+        Map map = new Map("default");
         map.printTiles();
     }
 }

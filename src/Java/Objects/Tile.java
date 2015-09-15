@@ -1,5 +1,7 @@
 package Java.Objects;
 
+import javafx.scene.image.Image;
+
 /**
  * Created by Brian on 9/12/2015.
  */
@@ -8,6 +10,7 @@ public class Tile {
     int column;
     String owner;
     Terrain terrain;
+    //Image image = new Image("/../../resources/" + terrain + ".jpeg");
 
     public Tile(int row, int col, String ter) {
         try {
