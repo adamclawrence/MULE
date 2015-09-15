@@ -1,0 +1,32 @@
+defaultTasks 'copyFXML', 'jar'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version '1.0'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/Java'
+        }
+        resources {
+            srcDir 'src/Java'
+        }
+    }
+}
+
+task copyFXML(type: Copy) {
+    from 'build/resources/main/*.fxml'
+    into 'build/classes/main/Java'
+}
+
+dependencies {
+    runtime files('src/Java/*.fxml')
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'M2 NightHawks MULE', 'Main-class': 'Java.Main'
+    }
+}
