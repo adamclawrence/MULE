@@ -19,11 +19,11 @@ public class DisplayGameConfigController implements Initializable {
 
     private MuleGame muleGame;
 
-    @FXML //fx: id display
-    private Label display;
+//    @FXML //fx: id display
+//    private Label display;
 
     public void initialize(URL url, ResourceBundle rb) {
-        display.setText(muleGame.map.getTileValues(0,0));
+        //display.setText(muleGame.map.getTileValues(0,0));
     }
 
     public void setMuleGame(MuleGame mulegame) {
