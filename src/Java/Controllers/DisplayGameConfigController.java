@@ -13,7 +13,12 @@ import Java.Objects.Player;
 import Java.Objects.MuleGame;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 /**
  * Created by AveryDingler on 9/10/15.
  */
@@ -67,6 +72,22 @@ public class DisplayGameConfigController implements Initializable {
                     }
                 });
                 */
+
+                // attempting to make a menu appear when a tile is clicked - would be best to made a pane (or new window)
+                // for each tile, and then this method calls to it
+                button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        StackPane pane = new StackPane();
+                        Rectangle r = new Rectangle();
+                        r.setX(100);
+                        r.setY(100);
+                        r.setWidth(100);
+                        r.setHeight(100);
+                        pane.getChildren().add(r);
+                        thePane.getChildren().add(pane);
+                    }
+                });
 
                 thePane.add(button, i, k);
             }
