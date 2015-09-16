@@ -53,6 +53,10 @@ public class Map {
         return level;
     }
 
+    public String getTile(int i, int k) {
+        return tiles[i][k].getTerrain().getName();
+    }
+
     public String getTileValues(int i, int k) {
         return "// /n" + "ROW: " + tiles[i][k].getRow() + "/n" + "COL: " + tiles[i][k].getColumn() + "/n" + "TER: " + tiles[i][k].getTerrain().getName();
     }
