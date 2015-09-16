@@ -42,10 +42,12 @@ public class ConfigurationController implements Initializable{
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL url, ResourceBundle rb) {
-        selectMap.getItems().addAll("Map1", "Map2", "Map3");
+        selectMap.getItems().addAll("default", "random");
         selectPlayers.getItems().addAll(1,2,3,4);
         selectDifficulty.getItems().addAll("Beginner");
         selectDifficulty.getSelectionModel().selectFirst();
+        selectMap.getSelectionModel().selectFirst();
+        selectPlayers.getSelectionModel().selectFirst();
     }
 
     public void switchToPlayers(ActionEvent event) throws IOException {

@@ -40,6 +40,7 @@ public class AddPlayerController implements Initializable{
 
     private MuleGame muleGame;
 
+    private DisplayGameConfigController displayGameConfigController;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,6 +70,9 @@ public class AddPlayerController implements Initializable{
                 ((Node)event.getSource()).getScene().getWindow().hide();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
+                displayGameConfigController = loader.getController();
+                displayGameConfigController.setMuleGame(muleGame);
+                startGame();
                 stage.show();
 
             } else {
@@ -76,6 +80,10 @@ public class AddPlayerController implements Initializable{
                 playerNumber.setText("PLAYER " + (x + 2));
             }
         }
+    }
+
+    public void startGame() {
+        displayGameConfigController.start();
     }
 
     private int nextNull(Player[] players) {
