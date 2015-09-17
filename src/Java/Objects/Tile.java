@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 public class Tile {
     int row;
     int column;
-    String owner;
+    Player owner;
     Terrain terrain;
     //Image image = new Image("/../../resources/" + terrain + ".jpeg");
 
@@ -40,7 +40,7 @@ public class Tile {
         return column;
     }
 
-    public String getOwner() {
+    public Player getOwner() {
         return owner;
     }
 

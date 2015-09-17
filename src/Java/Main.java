@@ -24,7 +24,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
         Main main = new Main();
-        main.run();
+       // main.run();
     }
 
     public void run() {

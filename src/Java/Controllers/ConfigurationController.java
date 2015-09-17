@@ -74,7 +74,7 @@ public class ConfigurationController implements Initializable{
     }
 
 
-    public Player generatePlayer(int playerNumber) {
-        return new Player("Player " + playerNumber, "Human", selectDifficulty.getValue());
-    }
+//    public Player generatePlayer(int playerNumber) {
+//        return new Player("Player " + playerNumber, "Human", selectDifficulty.getValue());
+//    }
 }
