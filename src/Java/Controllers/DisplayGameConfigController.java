@@ -62,10 +62,10 @@ public class DisplayGameConfigController implements Initializable {
     public void start() {
         for (int i = 0; i < 5; i++) {
             for (int k = 0; k < 9; k++) {
-                TileButton button = new TileButton();
+                TileButton button = new TileButton(muleGame.getMap().getTile(i,k));
                 button.setPrefWidth(Double.MAX_VALUE);
                 button.setPrefHeight(Double.MAX_VALUE);
-                button.setId(muleGame.getMap().getTile(i, k));
+                button.setId(muleGame.getMap().getTile(i, k).getTerrain().getName());
                 button.setCol(i);
                 button.setRow(k);
                 button.getStylesheets().addAll(this.getClass().getResource("/resources/style/style.css").toExternalForm());
@@ -76,7 +76,7 @@ public class DisplayGameConfigController implements Initializable {
                 button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        if (!button.isOwned()) {
+                        if (!button.getTile().isOwned()) {
 //                        StackPane pane = new StackPane();
 //                        Rectangle r = new Rectangle();
 //                        r.setX(100);
@@ -178,7 +178,7 @@ public class DisplayGameConfigController implements Initializable {
     }
 
     public void purchaseLand(Player player, TileButton button) {
-        button.setOwner(player);
+        button.getTile().setOwner(player);
         int price;
         if (selectingRound <= 2) {
             numSkipped = 0;
