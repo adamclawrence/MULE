@@ -9,6 +9,7 @@ public class Player {
 
     public String name;
     public String race;
+    public String color;
     public int food;
     public int energy;
     public int ore;
@@ -18,7 +19,8 @@ public class Player {
     //standard
     //tournament
 
-    public Player(String name, String race, String difficulty) {
+    public Player(String name, String race, String difficulty, String color) {
+        this.color = color;
         this.name = name;
         this.race  = race;
         if (Objects.equals(difficulty, "Beginner")) {
@@ -94,5 +96,8 @@ public class Player {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+    public String getColor() {
+        return color;
     }
 }

@@ -40,6 +40,8 @@ public class AddPlayerController implements Initializable{
 
     private MuleGame muleGame;
 
+    private Stage stage;
+
     private DisplayGameConfigController displayGameConfigController;
 
     @FXML
@@ -54,12 +56,16 @@ public class AddPlayerController implements Initializable{
         this.muleGame = muleGame;
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public void addPlayer(ActionEvent event) throws IOException {
         int x = nextNull(muleGame.getPlayers());
         if (x == 10) {
             return;
         } else {
-            muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty());
+            muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty(), colorPicker.getValue().toString());
             System.out.println(Arrays.toString(muleGame.getPlayers()));
             if (muleGame.players[(muleGame.getPlayers().length) - 1] != null) {
                 System.out.println("exit!");
@@ -67,8 +73,7 @@ public class AddPlayerController implements Initializable{
                 loader.setLocation(getClass().getResource("/Java/DisplayGameConfig.fxml"));
                 loader.load();
                 Parent p = loader.getRoot();
-                ((Node)event.getSource()).getScene().getWindow().hide();
-                Stage stage = new Stage();
+                ((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(p));
                 displayGameConfigController = loader.getController();
                 displayGameConfigController.setMuleGame(muleGame);
