@@ -77,6 +77,7 @@ public class AddPlayerController implements Initializable{
                 stage.setScene(new Scene(p));
                 displayGameConfigController = loader.getController();
                 displayGameConfigController.setMuleGame(muleGame);
+                displayGameConfigController.setStage(stage);
                 startGame();
                 stage.show();
 
