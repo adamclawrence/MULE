@@ -44,7 +44,13 @@ public class Tile {
         return owner;
     }
 
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
     public Terrain getTerrain() {
         return terrain;
     }
+
+    public boolean isOwned() { return owner != null; }
 }

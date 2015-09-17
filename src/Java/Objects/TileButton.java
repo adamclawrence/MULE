@@ -11,9 +11,11 @@ public class TileButton extends Button {
     private int row;
     private int col;
     private Player owner;
+    private Tile tile;
 
-    public TileButton() {
+    public TileButton(Tile tile) {
         super();
+        this.tile = tile;
     }
 
     public int getRow() { return row; }
@@ -24,13 +26,5 @@ public class TileButton extends Button {
 
     public void setCol(int col) { this.col = col; }
 
-    public Player getOwner() { return owner; }
-
-    public void setOwner(Player owner) {
-        this.owner = owner;
-    }
-
-    public boolean isOwned() {
-        return owner != null;
-    }
+    public Tile getTile() { return tile; }
 }
