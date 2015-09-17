@@ -14,11 +14,16 @@ import Java.Objects.MuleGame;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import Java.Objects.Tile;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.Popup;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
 
 /**
  * Created by AveryDingler on 9/10/15.
@@ -30,6 +35,7 @@ public class DisplayGameConfigController implements Initializable {
     private int selectingRound = 1;
     private int selectingPlayer = 0;
     private int numSkipped = 0;
+    private Stage stage;
 
 //    @FXML //fx: id display
 //    private Label display;
@@ -58,11 +64,9 @@ public class DisplayGameConfigController implements Initializable {
                 Button button = new Button();
                 button.setPrefWidth(Double.MAX_VALUE);
                 button.setPrefHeight(Double.MAX_VALUE);
-                //String url = "/resources/images/" + muleGame.getMap().getTile(i, k) + ".jpg";
-                //String hoverUrl = "/resources/images/" + muleGame.getMap().getTile(i, k) + "_hover.jpg";
                 button.setId(muleGame.getMap().getTile(i, k));
-                //button.setStyle("-fx-background-image: url(" + url + ")");
                 button.getStylesheets().addAll(this.getClass().getResource("/resources/style/style.css").toExternalForm());
+
 
                 // attempting to make a menu appear when a tile is clicked - would be best to made a pane (or new window)
                 // for each tile, and then this method calls to it
@@ -77,7 +81,43 @@ public class DisplayGameConfigController implements Initializable {
 //                        r.setHeight(100);
 //                        pane.getChildren().add(r);
 //                        thePane.getChildren().add(pane);
-                        purchaseLand(muleGame.getPlayers()[selectingPlayer], button);
+                        muleGame.setPrice(selectingRound);
+                        Button accept = new Button();
+                        accept.setText("Purchase for: " + muleGame.getPrice());
+                        Button decline = new Button();
+                        decline.setText("Return");
+                        Pane popPane = new Pane();
+                        popPane.setMinHeight(200);
+                        popPane.setMinWidth(200);
+                        VBox vbox = new VBox(accept, decline);
+                        popPane.getChildren().setAll(vbox);
+                        Popup popup = new Popup();
+                        popup.setX(200);
+                        popup.setY(200);
+                        popup.setAnchorX(event.getScreenX());
+                        popup.setAnchorY(event.getScreenY());
+                        popup.getContent().addAll(popPane);
+                        popup.show(stage);
+                        accept.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (muleGame.getPlayers()[selectingPlayer].getMoney() >= muleGame.getPrice()) {
+                                    purchaseLand(muleGame.getPlayers()[selectingPlayer], button);
+                                    popup.hide();
+                                } else {
+                                    TextField failText = new TextField();
+                                    failText.setText("Not enough Money!");
+                                    vbox.getChildren().setAll(accept, decline, failText);
+                                }
+                            }
+                        });
+                        decline.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                popup.hide();
+                            }
+                        });
+
                     }
                 });
 
@@ -108,6 +148,8 @@ public class DisplayGameConfigController implements Initializable {
 //
 //    }
 
+    public void setStage(Stage stage) { this.stage =stage;}
+
     public void skipSelection() {
         if (selectingRound <=2) {
             numSkipped = 0;
@@ -133,11 +175,13 @@ public class DisplayGameConfigController implements Initializable {
     public void purchaseLand(Player player, Button button) {
         int price;
         if (selectingRound <= 2) {
-            price = 0;
             numSkipped = 0;
+            price = 0;
         } else {
-            price = 50; // this line needs to be changed to actual price of the tile
+            price = muleGame.getPrice(); // this line needs to be changed to actual price of the tile
         }
+
+
         //Add a popup window here that says
         //"Do you want to purchase this land for {price}"
         //if yes, run following code
