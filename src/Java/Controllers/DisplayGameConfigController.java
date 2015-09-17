@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import Java.Objects.TileButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,10 +62,12 @@ public class DisplayGameConfigController implements Initializable {
     public void start() {
         for (int i = 0; i < 5; i++) {
             for (int k = 0; k < 9; k++) {
-                Button button = new Button();
+                TileButton button = new TileButton();
                 button.setPrefWidth(Double.MAX_VALUE);
                 button.setPrefHeight(Double.MAX_VALUE);
                 button.setId(muleGame.getMap().getTile(i, k));
+                button.setCol(i);
+                button.setRow(k);
                 button.getStylesheets().addAll(this.getClass().getResource("/resources/style/style.css").toExternalForm());
 
 
@@ -73,6 +76,7 @@ public class DisplayGameConfigController implements Initializable {
                 button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
+                        if (!button.isOwned()) {
 //                        StackPane pane = new StackPane();
 //                        Rectangle r = new Rectangle();
 //                        r.setX(100);
@@ -81,42 +85,43 @@ public class DisplayGameConfigController implements Initializable {
 //                        r.setHeight(100);
 //                        pane.getChildren().add(r);
 //                        thePane.getChildren().add(pane);
-                        muleGame.setPrice(selectingRound);
-                        Button accept = new Button();
-                        accept.setText("Purchase for: " + muleGame.getPrice());
-                        Button decline = new Button();
-                        decline.setText("Return");
-                        Pane popPane = new Pane();
-                        popPane.setMinHeight(200);
-                        popPane.setMinWidth(200);
-                        VBox vbox = new VBox(accept, decline);
-                        popPane.getChildren().setAll(vbox);
-                        Popup popup = new Popup();
-                        popup.setX(200);
-                        popup.setY(200);
-                        popup.setAnchorX(event.getScreenX());
-                        popup.setAnchorY(event.getScreenY());
-                        popup.getContent().addAll(popPane);
-                        popup.show(stage);
-                        accept.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                if (muleGame.getPlayers()[selectingPlayer].getMoney() >= muleGame.getPrice()) {
-                                    purchaseLand(muleGame.getPlayers()[selectingPlayer], button);
-                                    popup.hide();
-                                } else {
-                                    TextField failText = new TextField();
-                                    failText.setText("Not enough Money!");
-                                    vbox.getChildren().setAll(accept, decline, failText);
+                            muleGame.setPrice(selectingRound);
+                            Button accept = new Button();
+                            accept.setText("Purchase for: " + muleGame.getPrice());
+                            Button decline = new Button();
+                            decline.setText("Return");
+                            Pane popPane = new Pane();
+                            popPane.setMinHeight(200);
+                            popPane.setMinWidth(200);
+                            VBox vbox = new VBox(accept, decline);
+                            popPane.getChildren().setAll(vbox);
+                            Popup popup = new Popup();
+                            popup.setX(200);
+                            popup.setY(200);
+                            popup.setAnchorX(event.getScreenX());
+                            popup.setAnchorY(event.getScreenY());
+                            popup.getContent().addAll(popPane);
+                            popup.show(stage);
+                            accept.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    if (muleGame.getPlayers()[selectingPlayer].getMoney() >= muleGame.getPrice()) {
+                                        purchaseLand(muleGame.getPlayers()[selectingPlayer], button);
+                                        popup.hide();
+                                    } else {
+                                        TextField failText = new TextField();
+                                        failText.setText("Not enough Money!");
+                                        vbox.getChildren().setAll(accept, decline, failText);
+                                    }
                                 }
-                            }
-                        });
-                        decline.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                popup.hide();
-                            }
-                        });
+                            });
+                            decline.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    popup.hide();
+                                }
+                            });
+                        }
 
                     }
                 });
@@ -172,7 +177,8 @@ public class DisplayGameConfigController implements Initializable {
                 + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
     }
 
-    public void purchaseLand(Player player, Button button) {
+    public void purchaseLand(Player player, TileButton button) {
+        button.setOwner(player);
         int price;
         if (selectingRound <= 2) {
             numSkipped = 0;
