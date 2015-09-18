@@ -20,7 +20,7 @@ public class Map {
      **/
     public Map(String level) {
         this.level = level;
-        terrains = new String[]{"r", "p", "t", "m1", "m2", "m3"};
+        terrains = new String[]{"r", "p", "m1", "m2", "m3"};
 
         //if default random
         if (level.equals("default")) {
@@ -46,6 +46,7 @@ public class Map {
                     tiles[i][k] = new Tile(i, k, ter);
                 }
             }
+            tiles[4][2] = new Tile(4, 2, "t");
         }
     }
 
@@ -53,12 +54,8 @@ public class Map {
         return level;
     }
 
-    public String getTile(int i, int k) {
-        return tiles[i][k].getTerrain().getName();
-    }
-
-    public String getTileValues(int i, int k) {
-        return "// /n" + "ROW: " + tiles[i][k].getRow() + "/n" + "COL: " + tiles[i][k].getColumn() + "/n" + "TER: " + tiles[i][k].getTerrain().getName();
+    public Tile getTile(int i, int k) {
+        return tiles[i][k];
     }
 
     public void printTiles() {

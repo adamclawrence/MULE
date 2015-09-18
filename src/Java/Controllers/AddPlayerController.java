@@ -65,7 +65,7 @@ public class AddPlayerController implements Initializable{
         if (x == 10) {
             return;
         } else {
-            muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty());
+            muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty(), colorPicker.getValue().toString());
             System.out.println(Arrays.toString(muleGame.getPlayers()));
             if (muleGame.players[(muleGame.getPlayers().length) - 1] != null) {
                 System.out.println("exit!");
@@ -77,6 +77,7 @@ public class AddPlayerController implements Initializable{
                 stage.setScene(new Scene(p));
                 displayGameConfigController = loader.getController();
                 displayGameConfigController.setMuleGame(muleGame);
+                displayGameConfigController.setStage(stage);
                 startGame();
                 stage.show();
 
