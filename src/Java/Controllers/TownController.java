@@ -69,6 +69,7 @@ public class TownController implements Initializable {
                     displayGameConfigController = loader.getController();
                     displayGameConfigController.setMuleGame(muleGame);
                     displayGameConfigController.setStage(stage);
+                    displayGameConfigController.start();
                     stage.show();
                     System.out.println("CANNOT GO BACK");
                 } catch(Exception e) {
