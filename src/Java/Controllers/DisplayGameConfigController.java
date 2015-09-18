@@ -8,7 +8,11 @@ import java.util.ResourceBundle;
 import Java.Objects.TileButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import Java.Objects.Player;
 import Java.Objects.MuleGame;
@@ -45,6 +49,8 @@ public class DisplayGameConfigController implements Initializable {
     @FXML private Label currentPlayerLabel;
     @FXML private Button skipButton;
 
+    DisplayGameConfigController displayGameConfigController = this;
+
 
     public void initialize(URL url, ResourceBundle rb) {
         //display.setText(muleGame.map.getTileValues(0,0));
@@ -76,7 +82,22 @@ public class DisplayGameConfigController implements Initializable {
                 button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        if (!button.getTile().isOwned()) {
+                        if (button.getId().equals("t")) {
+                            try {
+                                FXMLLoader loader = new FXMLLoader();
+                                loader.setLocation(getClass().getResource("/Java/Town.fxml"));
+                                loader.load();
+                                Parent p = loader.getRoot();
+                                //((Node)event.getSource()).getScene().getWindow();
+                                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                stage.setScene(new Scene(p));
+                                TownController townController = loader.getController();
+                                townController.start(displayGameConfigController, muleGame, stage);
+                                stage.show();
+                            } catch (Exception e) {
+                                System.out.println(e + "THERE WAS AN ERROR WITH THE LOADER");
+                            }
+                        } else if (!button.getTile().isOwned()) {
 //                        StackPane pane = new StackPane();
 //                        Rectangle r = new Rectangle();
 //                        r.setX(100);
