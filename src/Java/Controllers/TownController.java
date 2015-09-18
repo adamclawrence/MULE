@@ -5,6 +5,7 @@ package Java.Controllers;
  */
 
 import Java.Objects.MuleGame;
+import Java.Objects.Pub;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class TownController implements Initializable {
     @FXML
@@ -74,6 +76,15 @@ public class TownController implements Initializable {
                     System.out.println("CANNOT GO BACK");
                 } catch(Exception e) {
                 }
+
+            }
+        });
+        pub_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+            Pub p = new Pub();
+                int bonus = p.gamble(10, 2);
+                System.out.println(bonus);
 
             }
         });

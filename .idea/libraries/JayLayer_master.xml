@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JayLayer-master">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/resources/libs/JayLayer-master.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
