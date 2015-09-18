@@ -70,3 +70,30 @@
     -fx-background-image: url("../../resources/images/t_hover.jpg");
     -fx-background-color: #C65BF9;
 }
+
+#configBackground {
+    -fx-background-color: #54CC94;
+}
+#selectPlayers, #selectDifficulty, #selectMap {
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 0px;
+    -fx-border-width: 0px;
+    -fx-border-color: #FFFFFF;
+    -fx-padding: 10px;
+}
+#selectPlayers:hover, #selectDifficulty:hover, #selectMap:hover {
+    -fx-background-color: #CCCCCC;
+    -fx-cursor: hand;
+}
+#startGame {
+    -fx-background-color: #80968B;
+    -fx-text-fill: #FFFFFF;
+    -fx-pref-width: 100%;
+    -fx-min-width: 400px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+#startGame:hover {
+    -fx-background-color: #666666;
+    -fx-cursor: hand;
+}
