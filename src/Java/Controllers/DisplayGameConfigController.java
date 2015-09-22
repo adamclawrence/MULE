@@ -75,7 +75,10 @@ public class DisplayGameConfigController implements Initializable {
                 button.setCol(i);
                 button.setRow(k);
                 button.getStylesheets().addAll(this.getClass().getResource("/resources/style/style.css").toExternalForm());
-
+                if (button.getTile().isOwned()) {
+                    String color = button.getTile().getOwner().getColor().substring(2);
+                    button.setStyle("-fx-background-color: #" + color);
+                }
 
                 // attempting to make a menu appear when a tile is clicked - would be best to made a pane (or new window)
                 // for each tile, and then this method calls to it
