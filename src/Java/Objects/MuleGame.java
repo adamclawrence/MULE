@@ -53,4 +53,12 @@ public class MuleGame {
     public void setMap(Map map) {
         this.map = map;
     }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void incRound() {
+        round++;
+    }
 }

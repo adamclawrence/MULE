@@ -10,15 +10,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     Stage currentStage;
+    JayLayer sound;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //javadoc
         //http://jgkamat.github.io/JayLayer/doc/jay/jaysound/JayLayer.html
-        JayLayer sound = new JayLayer("/audio/", "/audio/");
+        sound = new JayLayer("/audio/", "/audio/");
         int playlistNum = sound.createPlaylist(true);
-        sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
         sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
+        sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
         currentStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("Configuration.fxml"));
         currentStage.setTitle("NightHawks M.U.L.E");
@@ -27,13 +28,8 @@ public class Main extends Application {
         sound.startPlaylist(0);
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
 
-    public void run() {
-        Map map = new Map("default");
-        map.printTiles();
-    }
 }
