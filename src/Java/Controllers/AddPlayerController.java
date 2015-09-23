@@ -4,9 +4,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import Java.Objects.Map;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,7 +40,7 @@ public class AddPlayerController implements Initializable{
 
     private Stage stage;
 
-    private DisplayGameConfigController displayGameConfigController;
+    private MapController mapController;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,16 +66,15 @@ public class AddPlayerController implements Initializable{
             muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty(), colorPicker.getValue().toString());
             System.out.println(Arrays.toString(muleGame.getPlayers()));
             if (muleGame.players[(muleGame.getPlayers().length) - 1] != null) {
-                System.out.println("exit!");
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/DisplayGameConfig.fxml"));
+                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
                 loader.load();
                 Parent p = loader.getRoot();
                 ((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(p));
-                displayGameConfigController = loader.getController();
-                displayGameConfigController.setMuleGame(muleGame);
-                displayGameConfigController.setStage(stage);
+                mapController = loader.getController();
+                mapController.setMuleGame(muleGame);
+                mapController.setStage(stage);
                 startGame();
                 stage.show();
 
@@ -89,7 +86,7 @@ public class AddPlayerController implements Initializable{
     }
 
     public void startGame() {
-        displayGameConfigController.start();
+        mapController.start();
     }
 
     private int nextNull(Player[] players) {

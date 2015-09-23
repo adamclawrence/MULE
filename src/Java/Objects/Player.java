@@ -23,11 +23,11 @@ public class Player {
         this.color = color;
         this.name = name;
         this.race  = race;
-        if (Objects.equals(difficulty, "Beginner")) {
+        if (difficulty.contains("Beginner")) {
             food = 8;
             energy = 4;
             ore = 0;
-        } else if (Objects.equals(difficulty, "Standard")) {
+        } else if (difficulty.contains("Standard")) {
             food = 4;
             energy = 2;
             ore = 0;
@@ -36,9 +36,9 @@ public class Player {
             energy = 2;
             ore = 0;
         }
-        if (Objects.equals(race, "Flapper")) {
+        if (race.contains("Flapper")) {
             money = 1600;
-        } else if (Objects.equals(race, "Human")) {
+        } else if (race.contains("Human")) {
             money = 600;
         } else {
             money = 100;

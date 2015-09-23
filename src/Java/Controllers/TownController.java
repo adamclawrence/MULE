@@ -5,6 +5,7 @@ package Java.Controllers;
  */
 
 import Java.Objects.MuleGame;
+import Java.Objects.Pub;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class TownController implements Initializable {
     @FXML
@@ -36,7 +38,7 @@ public class TownController implements Initializable {
     private Button back_button;
 
     private Stage stage;
-    private DisplayGameConfigController displayGameConfigController;
+    private MapController mapController;
     private MuleGame muleGame;
 
 
@@ -44,12 +46,12 @@ public class TownController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void start(DisplayGameConfigController dGCC, MuleGame mG, Stage s) {
-        this.displayGameConfigController = dGCC;
+    public void start(MapController dGCC, MuleGame mG, Stage s) {
+        this.mapController = dGCC;
         this.muleGame = mG;
         this.stage = s;
 
-        if (displayGameConfigController == null) {
+        if (mapController == null) {
             System.out.println("display game config controller");
         }
         if (muleGame == null) {
@@ -60,20 +62,29 @@ public class TownController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/DisplayGameConfig.fxml"));
+                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
                 try {
                     loader.load();
                     Parent p = loader.getRoot();
                     ((Node)event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(p));
-                    displayGameConfigController = loader.getController();
-                    displayGameConfigController.setMuleGame(muleGame);
-                    displayGameConfigController.setStage(stage);
-                    displayGameConfigController.start();
+                    mapController = loader.getController();
+                    mapController.setMuleGame(muleGame);
+                    mapController.setStage(stage);
+                    mapController.start();
                     stage.show();
                     System.out.println("CANNOT GO BACK");
                 } catch(Exception e) {
                 }
+
+            }
+        });
+        pub_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+            Pub p = new Pub();
+                int bonus = p.gamble(10, 2);
+                System.out.println(bonus);
 
             }
         });

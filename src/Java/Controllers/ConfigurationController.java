@@ -10,6 +10,8 @@ import Java.Objects.Map;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import io.github.jgkamat.JayLayer.JayLayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,10 +45,11 @@ public class ConfigurationController implements Initializable{
     @FXML // fx:id="startGame"
     private Button startGame; // Value injected by FXMLLoader
 
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL url, ResourceBundle rb) {
         selectMap.getItems().addAll("default", "random");
-        selectPlayers.getItems().addAll(1, 2, 3, 4);
+        selectPlayers.getItems().addAll(2, 3, 4);
         selectDifficulty.getItems().addAll("Beginner");
         selectDifficulty.getSelectionModel().selectFirst();
         selectMap.getSelectionModel().selectFirst();
@@ -55,6 +58,8 @@ public class ConfigurationController implements Initializable{
     }
 
     public void switchToPlayers(ActionEvent event) throws IOException {
+
+
         Player[] players = new Player[selectPlayers.getValue()];
         Map map = new Map(selectMap.getValue());
         MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
@@ -73,8 +78,4 @@ public class ConfigurationController implements Initializable{
         stage.show();
     }
 
-
-//    public Player generatePlayer(int playerNumber) {
-//        return new Player("Player " + playerNumber, "Human", selectDifficulty.getValue());
-//    }
 }
