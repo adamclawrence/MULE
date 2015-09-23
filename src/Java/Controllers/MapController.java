@@ -35,7 +35,7 @@ public class MapController implements Initializable {
     private int selectingPlayer = 0;
     private int numSkipped = 0;
     private Stage stage;
-    private boolean isSelectRound = true;
+    private boolean isSelectRound;
 
 //    @FXML //fx: id display
 //    private Label display;
@@ -104,7 +104,7 @@ public class MapController implements Initializable {
 //                        r.setHeight(100);
 //                        pane.getChildren().add(r);
 //                        thePane.getChildren().add(pane);
-                            muleGame.setPrice(selectingRound, isSelectRound);
+                            muleGame.setPrice(selectingRound);
                             Button accept = new Button();
                             accept.setText("Purchase for: " + muleGame.getPrice());
                             Button decline = new Button();
@@ -194,6 +194,7 @@ public class MapController implements Initializable {
 
     public void purchaseLand(Player player, TileButton button) {
         button.getTile().setOwner(player);
+        player.incLandCounter();
         int price;
         if (selectingRound <= 2) {
             numSkipped = 0;
@@ -216,7 +217,6 @@ public class MapController implements Initializable {
             selectingRound++;
             selectingPlayer = 0;
             if (numSkipped == muleGame.getPlayers().length) {
-                isSelectRound = false;
                 System.out.println("ALL SKIPPED END SELECTION PHASE!");
             } else {
                 numSkipped = 0;

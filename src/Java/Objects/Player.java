@@ -14,6 +14,7 @@ public class Player {
     public int energy;
     public int ore;
     public int money;
+    public int landCounter;
 
     //beginner
     //standard
@@ -99,5 +100,9 @@ public class Player {
     }
     public String getColor() {
         return color;
+    }
+
+    public void incLandCounter() {
+        landCounter++;
     }
 }
