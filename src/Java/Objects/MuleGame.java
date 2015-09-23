@@ -27,12 +27,14 @@ public class MuleGame {
         return difficulty;
     }
 
-    public void setPrice(int round) {
+    public void setPrice(int round, boolean landSelect) {
         Random rng = new Random();
-        if (round <= 2) {
+        if (round <= 2 && landSelect) {
             price = 0;
-        } else {
+        } else if (!landSelect) {
             price = 300 + (round * rng.nextInt(101));
+        } else {
+            price = 300;
         }
     }
 
@@ -61,4 +63,5 @@ public class MuleGame {
     public void incRound() {
         round++;
     }
+
 }
