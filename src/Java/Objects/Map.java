@@ -46,7 +46,7 @@ public class Map {
                     tiles[i][k] = new Tile(i, k, ter);
                 }
             }
-            tiles[4][2] = new Tile(4, 2, "t");
+            tiles[2][4] = new Tile(2, 4, "t");
         }
     }
 
