@@ -14,6 +14,9 @@ public class Player {
     public int energy;
     public int ore;
     public int money;
+    public int landCounter;
+    private int score;
+    private boolean isLast;
 
     //beginner
     //standard
@@ -23,11 +26,12 @@ public class Player {
         this.color = color;
         this.name = name;
         this.race  = race;
-        if (Objects.equals(difficulty, "Beginner")) {
+        this.score = 0;
+        if (difficulty.contains("Beginner")) {
             food = 8;
             energy = 4;
             ore = 0;
-        } else if (Objects.equals(difficulty, "Standard")) {
+        } else if (difficulty.contains("Standard")) {
             food = 4;
             energy = 2;
             ore = 0;
@@ -36,9 +40,9 @@ public class Player {
             energy = 2;
             ore = 0;
         }
-        if (Objects.equals(race, "Flapper")) {
+        if (race.contains("Flapper")) {
             money = 1600;
-        } else if (Objects.equals(race, "Human")) {
+        } else if (race.contains("Human")) {
             money = 600;
         } else {
             money = 100;
@@ -99,5 +103,31 @@ public class Player {
     }
     public String getColor() {
         return color;
+    }
+
+    public void incLandCounter() {
+        landCounter++;
+    }
+
+    public void refreshScore() {
+        int newScore = 0;
+        newScore += landCounter * 500;
+        newScore += money;
+        newScore += energy;
+        newScore += food;
+        newScore += ore;
+        score = newScore;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public boolean getIsLast() {
+        return isLast;
+    }
+
+    public void setIsLast(boolean value) {
+        isLast = value;
     }
 }
