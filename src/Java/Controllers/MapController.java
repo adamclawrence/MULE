@@ -36,6 +36,7 @@ public class MapController implements Initializable {
     private int numSkipped = 0;
     private Stage stage;
     private boolean isSelectRound;
+    private int current;
 
 //    @FXML //fx: id display
 //    private Label display;
@@ -176,6 +177,7 @@ public class MapController implements Initializable {
                     stage.setScene(new Scene(p));
                     RoundController roundController = loader.getController();
                     roundController.setMuleGame(muleGame);
+                    roundController.setCurrent(current);
                     roundController.setStage(stage);
                     roundController.start();
                     stage.show();
@@ -188,8 +190,13 @@ public class MapController implements Initializable {
         } else {
             selectingPlayer++;
         }
+
         currentPlayerLabel.setText(muleGame.getPlayers()[selectingPlayer].getName()
                 + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
+    }
+
+    public void setSkips(int skips) {
+        this.numSkipped = skips;
     }
 
     public void purchaseLand(Player player, TileButton button) {

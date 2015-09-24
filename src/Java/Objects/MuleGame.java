@@ -1,5 +1,8 @@
 package Java.Objects;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -10,7 +13,7 @@ public class MuleGame {
     public Player[] players;
     public String difficulty;
     public Map map;
-    private int round = 0;
+    private int round = 1;
     private int price;
 
     public MuleGame(String difficulty, Map map, Player[] players ) {
@@ -29,9 +32,9 @@ public class MuleGame {
 
     public void setPrice(int round) {
         Random rng = new Random();
-        if (round <= 2 && this.round < 1) {
+        if (round <= 2 && this.round < 2) {
             price = 0;
-        } else if (this.round >= 1) {
+        } else if (this.round >= 2) {
             price = 300 + (this.round * rng.nextInt(101));
         } else {
             price = 300;
@@ -64,7 +67,25 @@ public class MuleGame {
         round++;
     }
 
+    private class playerComparator implements Comparator<Player> {
+
+        @Override
+        public int compare(Player p1, Player p2) {
+            return p1.getScore() - p2.getScore();
+        }
+    }
+
+
     public void arrangePlayers() {
+        for (Player p: players) {
+            p.refreshScore();
+            p.setIsLast(false);
+        }
+        Arrays.sort(players, new playerComparator());
+        players[players.length - 1].setIsLast(true);
+        for (Player p: players) {
+            System.out.println(p);
+        }
 
     }
 

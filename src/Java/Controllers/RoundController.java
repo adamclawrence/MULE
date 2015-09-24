@@ -55,13 +55,17 @@ public class RoundController implements Initializable {
     @FXML
     private Button continueButton;
 
+    private int current;
     private MapController mapController;
     private MuleGame muleGame;
     private Stage stage;
+    private int skips;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
     }
+
+    public void setSkips(int skips) { this.skips = skips; }
 
     public void setStage(Stage stage) { this.stage =stage;}
 
@@ -69,7 +73,10 @@ public class RoundController implements Initializable {
         this.muleGame = mulegame;
     }
 
+    public void setCurrent(int current) { this.current = current % muleGame.getPlayers().length; }
+
     public void start() {
+        muleGame.arrangePlayers();
        //Image human = new Image(".." + File.separator + ".." + File.separator + "resources" + File.separator + "images" + File.separator + "human.jpg");
         Image human = new Image("/resources/images/human.jpg");
         Image flapper = new Image("/resources/images/flapper.jpg");
@@ -100,10 +107,11 @@ public class RoundController implements Initializable {
 
                 }
                 Parent p = loader.getRoot();
-                ((Node)event.getSource()).getScene().getWindow();
+                ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(p));
                 mapController = loader.getController();
                 mapController.setMuleGame(muleGame);
+                mapController.setSkips(skips);
                 mapController.setStage(stage);
                 mapController.start();
                 stage.show();
