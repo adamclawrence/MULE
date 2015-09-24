@@ -45,9 +45,16 @@ public class ConfigurationController implements Initializable{
     @FXML // fx:id="startGame"
     private Button startGame; // Value injected by FXMLLoader
 
+    public JayLayer sound;
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL url, ResourceBundle rb) {
+        sound = new JayLayer("/audio/", "/audio/");
+        int playlistNum = sound.createPlaylist(true);
+        sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
+        sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
+        sound.addSoundEffect("fart.mp3");
+        //sound.startPlaylist(0);
         selectMap.getItems().addAll("default", "random");
         selectPlayers.getItems().addAll(2, 3, 4);
         selectDifficulty.getItems().addAll("Beginner");
@@ -59,10 +66,10 @@ public class ConfigurationController implements Initializable{
 
     public void switchToPlayers(ActionEvent event) throws IOException {
 
-
+        sound.playSoundEffect(0);
         Player[] players = new Player[selectPlayers.getValue()];
         Map map = new Map(selectMap.getValue());
-        MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players);
+        MuleGame muleGame = new MuleGame(selectDifficulty.getValue(), map, players, sound);
 
         //((Node)event.getSource()).getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();

@@ -1,5 +1,7 @@
 package Java.Objects;
 
+import io.github.jgkamat.JayLayer.JayLayer;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -15,11 +17,13 @@ public class MuleGame {
     public Map map;
     private int round = 1;
     private int price;
+    public JayLayer sound;
 
-    public MuleGame(String difficulty, Map map, Player[] players ) {
+    public MuleGame(String difficulty, Map map, Player[] players, JayLayer sound ) {
         this.difficulty = difficulty;
         this.map = map;
         this.players = players;
+        this.sound = sound;
 
     }
     public Player[] getPlayers() {

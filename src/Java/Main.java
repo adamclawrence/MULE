@@ -26,16 +26,17 @@ public class Main extends Application {
         });
         //javadoc
         //http://jgkamat.github.io/JayLayer/doc/jay/jaysound/JayLayer.html
-        sound = new JayLayer("/audio/", "/audio/");
-        int playlistNum = sound.createPlaylist(true);
-        sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
-        sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
+//        sound = new JayLayer("/audio/", "/audio/");
+//        int playlistNum = sound.createPlaylist(true);
+//        sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
+//        sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
+//        sound.addSoundEffect("fart.mp3");
         currentStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("Configuration.fxml"));
         currentStage.setTitle("NightHawks M.U.L.E");
         currentStage.setScene(new Scene(root, 600, 400));
         currentStage.show();
-        sound.startPlaylist(0);
+        //sound.startPlaylist(0);
     }
 
     public static void main(String[] args) {

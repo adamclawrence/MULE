@@ -59,6 +59,7 @@ public class AddPlayerController implements Initializable{
     }
 
     public void addPlayer(ActionEvent event) throws IOException {
+        muleGame.sound.playSoundEffect(0);
         int x = nextNull(muleGame.getPlayers());
         if (x == 10) {
             return;
