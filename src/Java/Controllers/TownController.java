@@ -5,6 +5,7 @@ package Java.Controllers;
  */
 
 import Java.Objects.MuleGame;
+import Java.Objects.Player;
 import Java.Objects.Pub;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,10 +41,15 @@ public class TownController implements Initializable {
     private Stage stage;
     private MapController mapController;
     private MuleGame muleGame;
+    private int current;
 
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
     }
 
     public void start(MapController dGCC, MuleGame mG, Stage s) {
@@ -85,6 +91,23 @@ public class TownController implements Initializable {
             Pub p = new Pub();
                 int bonus = p.gamble(10, 2);
                 System.out.println(bonus);
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/Java/Round.fxml"));
+                    loader.load();
+                    Parent par = loader.getRoot();
+                    //((Node)event.getSource()).getScene().getWindow();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(par));
+                    RoundController roundController = loader.getController();
+                    roundController.setMuleGame(muleGame);
+                    roundController.setCurrent(current++);
+                    roundController.setStage(stage);
+                    roundController.start();
+                    stage.show();
+                } catch (Exception e) {
+                    System.out.println(e + "THERE WAS AN ERROR WITH THE LOADER");
+                }
 
             }
         });

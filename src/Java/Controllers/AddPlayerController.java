@@ -66,6 +66,8 @@ public class AddPlayerController implements Initializable{
             muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty(), colorPicker.getValue().toString());
             System.out.println(Arrays.toString(muleGame.getPlayers()));
             if (muleGame.players[(muleGame.getPlayers().length) - 1] != null) {
+                muleGame.arrangePlayers();
+                muleGame.getPlayers()[muleGame.getPlayers().length - 1].setIsLast(true);
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/Java/Map.fxml"));
                 loader.load();
