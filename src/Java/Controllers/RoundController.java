@@ -55,7 +55,7 @@ public class RoundController implements Initializable {
     @FXML
     private Button continueButton;
 
-    private int current;
+   // private int current = -1;
     private MapController mapController;
     private MuleGame muleGame;
     private Stage stage;
@@ -73,10 +73,16 @@ public class RoundController implements Initializable {
         this.muleGame = mulegame;
     }
 
-    public void setCurrent(int current) { this.current = current % muleGame.getPlayers().length; }
+   // public void setCurrent(int current) { this.current = current % muleGame.getPlayers().length; }
 
     public void start() {
+
         muleGame.arrangePlayers();
+        if (!muleGame.selectionRound) {
+            System.out.println("It is " + muleGame.getPlayers()[muleGame.getCurrentPlayer()].toString() + "'s turn!");
+        } else {
+            System.out.println("Next is a land selection");
+        }
        //Image human = new Image(".." + File.separator + ".." + File.separator + "resources" + File.separator + "images" + File.separator + "human.jpg");
         Image human = new Image("/resources/images/human.jpg");
         Image flapper = new Image("/resources/images/flapper.jpg");

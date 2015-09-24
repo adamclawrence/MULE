@@ -50,7 +50,6 @@ public class MapController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         //display.setText(muleGame.map.getTileValues(0,0));
-        System.out.println("BLJDSLKFJLSDKFJL:");
     }
 
     public void setMuleGame(MuleGame mulegame) {
@@ -149,13 +148,21 @@ public class MapController implements Initializable {
                 thePane.add(button, i, k);
             }
         }
-        currentPlayerLabel.setText(muleGame.getPlayers()[selectingPlayer].getName() + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
+        if (muleGame.selectionRound) {
+            currentPlayerLabel.setText("LS: " + muleGame.getPlayers()[selectingPlayer].getName()
+                    + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
+        } else {
+            currentPlayerLabel.setText("TURN: " + muleGame.getPlayers()[selectingPlayer].getName()
+                    + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
+        }
+
     }
 
     public void setStage(Stage stage) { this.stage =stage;}
 
     public void skipSelection(ActionEvent event) {
-        if (selectingRound <=2) {
+        muleGame.sound.playSoundEffect(0);
+        if (selectingRound <=2 && muleGame.getRound() == 1) {
             numSkipped = 0;
         } else {
             numSkipped++;
@@ -167,6 +174,7 @@ public class MapController implements Initializable {
             if (numSkipped == muleGame.getPlayers().length) {
                 System.out.println("ALL SKIPPED END SELECTION PHASE!");
                 muleGame.incRound();
+                muleGame.selectionRound = false;
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/Java/Round.fxml"));
@@ -177,7 +185,7 @@ public class MapController implements Initializable {
                     stage.setScene(new Scene(p));
                     RoundController roundController = loader.getController();
                     roundController.setMuleGame(muleGame);
-                    roundController.setCurrent(current);
+                   // roundController.setCurrent(current);
                     roundController.setStage(stage);
                     roundController.start();
                     stage.show();
@@ -190,8 +198,7 @@ public class MapController implements Initializable {
         } else {
             selectingPlayer++;
         }
-
-        currentPlayerLabel.setText(muleGame.getPlayers()[selectingPlayer].getName()
+        currentPlayerLabel.setText("LS: " + muleGame.getPlayers()[selectingPlayer].getName()
                 + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
     }
 
@@ -207,14 +214,8 @@ public class MapController implements Initializable {
             numSkipped = 0;
             price = muleGame.getPrice();
         } else {
-            price = muleGame.getPrice(); // this line needs to be changed to actual price of the tile
+            price = muleGame.getPrice();
         }
-
-
-        //Add a popup window here that says
-        //"Do you want to purchase this land for {price}"
-        //if yes, run following code
-        //if no, return
 
         String color = player.getColor().substring(2);
         button.setStyle("-fx-background-color: #" + color);
@@ -223,16 +224,12 @@ public class MapController implements Initializable {
         if (selectingPlayer == muleGame.getPlayers().length - 1) {
             selectingRound++;
             selectingPlayer = 0;
-            if (numSkipped == muleGame.getPlayers().length) {
-                System.out.println("ALL SKIPPED END SELECTION PHASE!");
-            } else {
-                numSkipped = 0;
-            }
+            numSkipped = 0;
         } else {
             selectingPlayer++;
         }
 
-        currentPlayerLabel.setText(muleGame.getPlayers()[selectingPlayer].getName()
+        currentPlayerLabel.setText("LS: " + muleGame.getPlayers()[selectingPlayer].getName()
                 + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
 
 

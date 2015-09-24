@@ -17,7 +17,9 @@ public class MuleGame {
     public Map map;
     private int round = 1;
     private int price;
+    public boolean selectionRound = true;
     public JayLayer sound;
+    public int currentPlayer = 0;
 
     public MuleGame(String difficulty, Map map, Player[] players, JayLayer sound ) {
         this.difficulty = difficulty;
@@ -71,6 +73,18 @@ public class MuleGame {
         round++;
     }
 
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void incCurrentPlayer() {
+        currentPlayer += 1;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
     private class playerComparator implements Comparator<Player> {
 
         @Override
@@ -87,10 +101,6 @@ public class MuleGame {
         }
         Arrays.sort(players, new playerComparator());
         players[players.length - 1].setIsLast(true);
-        for (Player p: players) {
-            System.out.println(p);
-        }
-
     }
 
 }

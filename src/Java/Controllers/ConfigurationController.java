@@ -54,7 +54,7 @@ public class ConfigurationController implements Initializable{
         sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
         sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
         sound.addSoundEffect("fart.mp3");
-        //sound.startPlaylist(0);
+        sound.startPlaylist(0);
         selectMap.getItems().addAll("default", "random");
         selectPlayers.getItems().addAll(2, 3, 4);
         selectDifficulty.getItems().addAll("Beginner");

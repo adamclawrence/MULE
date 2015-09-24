@@ -41,16 +41,16 @@ public class TownController implements Initializable {
     private Stage stage;
     private MapController mapController;
     private MuleGame muleGame;
-    private int current;
+   // private int current;
 
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void setCurrent(int current) {
-        this.current = current;
-    }
+  //  public void setCurrent(int current) {
+   //     this.current = current;
+  //  }
 
     public void start(MapController dGCC, MuleGame mG, Stage s) {
         this.mapController = dGCC;
@@ -100,8 +100,14 @@ public class TownController implements Initializable {
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(par));
                     RoundController roundController = loader.getController();
+                    if (muleGame.getCurrentPlayer() == (muleGame.getPlayers().length - 1)) {
+                        muleGame.setCurrentPlayer(0);
+                        muleGame.selectionRound = true;
+                    } else {
+                        muleGame.incCurrentPlayer();
+                    }
                     roundController.setMuleGame(muleGame);
-                    roundController.setCurrent(current++);
+                  //  roundController.setCurrent(current++);
                     roundController.setStage(stage);
                     roundController.start();
                     stage.show();
