@@ -5,7 +5,6 @@ package Java.Controllers;
  */
 
 import Java.Objects.MuleGame;
-import Java.Objects.Player;
 import Java.Objects.Pub;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -68,7 +67,7 @@ public class TownController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
+                loader.setLocation(getClass().getResource("/fxml/Map.fxml"));
                 try {
                     loader.load();
                     Parent p = loader.getRoot();
@@ -93,7 +92,7 @@ public class TownController implements Initializable {
                 System.out.println(bonus);
                 try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/Java/Round.fxml"));
+                    loader.setLocation(getClass().getResource("/fxml/Round.fxml"));
                     loader.load();
                     Parent par = loader.getRoot();
                     //((Node)event.getSource()).getScene().getWindow();

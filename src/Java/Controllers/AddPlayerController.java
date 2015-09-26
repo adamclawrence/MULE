@@ -69,11 +69,10 @@ public class AddPlayerController implements Initializable{
             System.out.println(Arrays.toString(muleGame.getPlayers()));
             if (muleGame.players[(muleGame.getPlayers().length) - 1] != null) {
 
-
                 muleGame.arrangePlayers();
                 muleGame.getPlayers()[muleGame.getPlayers().length - 1].setIsLast(true);
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/Round.fxml"));
+                loader.setLocation(getClass().getResource("/fxml/Round.fxml"));
                 loader.load();
                 Parent p = loader.getRoot();
                 ((Node)event.getSource()).getScene().getWindow();
@@ -83,21 +82,6 @@ public class AddPlayerController implements Initializable{
                 roundController.setStage(stage);
                 startGame();
                 stage.show();
-
-//                muleGame.arrangePlayers();
-//                muleGame.getPlayers()[muleGame.getPlayers().length - 1].setIsLast(true);
-//                FXMLLoader loader = new FXMLLoader();
-//                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
-//                loader.load();
-//                Parent p = loader.getRoot();
-//                ((Node)event.getSource()).getScene().getWindow();
-//                stage.setScene(new Scene(p));
-//                mapController = loader.getController();
-//                mapController.setMuleGame(muleGame);
-//                mapController.setStage(stage);
-//                startGame();
-//                stage.show();
-
             } else {
                 newName.clear();
                 playerNumber.setText("PLAYER " + (x + 2));

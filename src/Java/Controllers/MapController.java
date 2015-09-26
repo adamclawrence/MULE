@@ -1,7 +1,6 @@
 package Java.Controllers;
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -83,7 +82,7 @@ public class MapController implements Initializable {
                         if (button.getId().equals("t")) {
                             try {
                                 FXMLLoader loader = new FXMLLoader();
-                                loader.setLocation(getClass().getResource("/Java/Town.fxml"));
+                                loader.setLocation(getClass().getResource("/fxml/Town.fxml"));
                                 loader.load();
                                 Parent p = loader.getRoot();
                                 //((Node)event.getSource()).getScene().getWindow();
@@ -177,7 +176,7 @@ public class MapController implements Initializable {
                 muleGame.selectionRound = false;
                 try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/Java/Round.fxml"));
+                    loader.setLocation(getClass().getResource("/fxml/Round.fxml"));
                     loader.load();
                     Parent p = loader.getRoot();
                     //((Node)event.getSource()).getScene().getWindow();
