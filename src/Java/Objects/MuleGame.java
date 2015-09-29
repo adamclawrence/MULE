@@ -1,11 +1,7 @@
 package Java.Objects;
 
 import io.github.jgkamat.JayLayer.JayLayer;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by AveryDingler on 9/8/15.
@@ -17,14 +13,25 @@ public class MuleGame {
     public Map map;
     private int round = 1;
     private int price;
+    public boolean selectionRound = true;
     public JayLayer sound;
+    public int currentPlayer = 0;
+    private int timeForTurn = 0;
+    public int timeRemaining = 0;
+    public Timer t;
 
     public MuleGame(String difficulty, Map map, Player[] players, JayLayer sound ) {
         this.difficulty = difficulty;
         this.map = map;
         this.players = players;
         this.sound = sound;
+    }
+    public int getTimeForTurn() {
+        return timeForTurn;
+    }
 
+    public void setTimeForTurn(int time) {
+        this.timeForTurn = time;
     }
     public Player[] getPlayers() {
         return players;
@@ -71,6 +78,18 @@ public class MuleGame {
         round++;
     }
 
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void incCurrentPlayer() {
+        currentPlayer += 1;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
     private class playerComparator implements Comparator<Player> {
 
         @Override
@@ -87,10 +106,34 @@ public class MuleGame {
         }
         Arrays.sort(players, new playerComparator());
         players[players.length - 1].setIsLast(true);
-        for (Player p: players) {
-            System.out.println(p);
-        }
-
     }
+
+//    public void startTimer(int turnTime) {
+//        timeRemaining = turnTime;
+//        System.out.println(timeRemaining);
+//        Timer t = new Timer();
+//        t.scheduleAtFixedRate(
+//                new TimerTask()
+//                {
+//                    public void run()
+//                    {
+//                        timeRemaining--;
+//                        System.out.println(timeRemaining);
+//                        if (timeRemaining == 0) {
+//                            System.out.print("TURN ENDED");
+//                            //----- we can update a label every second------
+//                            //label.update();
+//                            //---------------
+//
+//                            //Here we need to basically hit the pub button
+//                            //but dont add any money to the player
+//                            t.cancel();
+//                        }
+//                    }
+//                },
+//                1000,      // run first occurrence after 1 second
+//                1000);  // run every one seconds
+//
+//    }
 
 }

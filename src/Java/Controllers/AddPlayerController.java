@@ -40,7 +40,8 @@ public class AddPlayerController implements Initializable{
 
     private Stage stage;
 
-    private MapController mapController;
+   // private MapController mapController;
+    private RoundController roundController;
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,20 +68,20 @@ public class AddPlayerController implements Initializable{
             muleGame.players[x] = new Player(newName.getText(), raceGroup.getSelectedToggle().toString(), muleGame.getDifficulty(), colorPicker.getValue().toString());
             System.out.println(Arrays.toString(muleGame.getPlayers()));
             if (muleGame.players[(muleGame.getPlayers().length) - 1] != null) {
+
                 muleGame.arrangePlayers();
                 muleGame.getPlayers()[muleGame.getPlayers().length - 1].setIsLast(true);
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
+                loader.setLocation(getClass().getResource("/fxml/Round.fxml"));
                 loader.load();
                 Parent p = loader.getRoot();
                 ((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(p));
-                mapController = loader.getController();
-                mapController.setMuleGame(muleGame);
-                mapController.setStage(stage);
+                roundController = loader.getController();
+                roundController.setMuleGame(muleGame);
+                roundController.setStage(stage);
                 startGame();
                 stage.show();
-
             } else {
                 newName.clear();
                 playerNumber.setText("PLAYER " + (x + 2));
@@ -89,7 +90,7 @@ public class AddPlayerController implements Initializable{
     }
 
     public void startGame() {
-        mapController.start();
+        roundController.start();
     }
 
     private int nextNull(Player[] players) {

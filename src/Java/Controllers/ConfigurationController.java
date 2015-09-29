@@ -21,7 +21,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-import javafx.stage.Window;
 
 public class ConfigurationController implements Initializable{
 
@@ -49,12 +48,14 @@ public class ConfigurationController implements Initializable{
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL url, ResourceBundle rb) {
+        //javadoc
+        //http://jgkamat.github.io/JayLayer/doc/jay/jaysound/JayLayer.html
         sound = new JayLayer("/audio/", "/audio/");
         int playlistNum = sound.createPlaylist(true);
-        sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
         sound.addToPlaylist(playlistNum, "Boyfriend.mp3");
+        sound.addToPlaylist(playlistNum, "No Tellin'.mp3");
         sound.addSoundEffect("fart.mp3");
-        //sound.startPlaylist(0);
+        sound.startPlaylist(0);
         selectMap.getItems().addAll("default", "random");
         selectPlayers.getItems().addAll(2, 3, 4);
         selectDifficulty.getItems().addAll("Beginner");
@@ -73,7 +74,7 @@ public class ConfigurationController implements Initializable{
 
         //((Node)event.getSource()).getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Java/AddPlayer.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/AddPlayer.fxml"));
         loader.load();
         Parent p = loader.getRoot();
         //((Node)event.getSource()).getScene().getWindow();

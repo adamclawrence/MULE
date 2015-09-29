@@ -130,4 +130,9 @@ public class Player {
     public void setIsLast(boolean value) {
         isLast = value;
     }
+
+    public int calculateTimeForTurn(int round) {
+        //change this to be an actual calculation of the time
+        return 10;
+    }
 }

@@ -5,7 +5,6 @@ package Java.Controllers;
  */
 
 import Java.Objects.MuleGame;
-import Java.Objects.Player;
 import Java.Objects.Pub;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class TownController implements Initializable {
     @FXML
-    private Button pub_button;
+    public Button pub_button;
 
     @FXML
     private Button assay_office_button;
@@ -41,16 +40,16 @@ public class TownController implements Initializable {
     private Stage stage;
     private MapController mapController;
     private MuleGame muleGame;
-    private int current;
+   // private int current;
 
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void setCurrent(int current) {
-        this.current = current;
-    }
+  //  public void setCurrent(int current) {
+   //     this.current = current;
+  //  }
 
     public void start(MapController dGCC, MuleGame mG, Stage s) {
         this.mapController = dGCC;
@@ -68,7 +67,7 @@ public class TownController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
+                loader.setLocation(getClass().getResource("/fxml/Map.fxml"));
                 try {
                     loader.load();
                     Parent p = loader.getRoot();
@@ -88,27 +87,34 @@ public class TownController implements Initializable {
         pub_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            Pub p = new Pub();
+                muleGame.t.cancel();
+                Pub p = new Pub();
                 int bonus = p.gamble(10, 2);
                 System.out.println(bonus);
                 try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/Java/Round.fxml"));
+                    loader.setLocation(getClass().getResource("/fxml/Round.fxml"));
                     loader.load();
                     Parent par = loader.getRoot();
                     //((Node)event.getSource()).getScene().getWindow();
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(par));
                     RoundController roundController = loader.getController();
+                    if (muleGame.getCurrentPlayer() == (muleGame.getPlayers().length - 1)) {
+                        muleGame.setCurrentPlayer(0);
+                        muleGame.selectionRound = true;
+                        muleGame.incRound();
+                    } else {
+                        muleGame.incCurrentPlayer();
+                    }
                     roundController.setMuleGame(muleGame);
-                    roundController.setCurrent(current++);
+                  //  roundController.setCurrent(current++);
                     roundController.setStage(stage);
                     roundController.start();
                     stage.show();
                 } catch (Exception e) {
                     System.out.println(e + "THERE WAS AN ERROR WITH THE LOADER");
                 }
-
             }
         });
     }

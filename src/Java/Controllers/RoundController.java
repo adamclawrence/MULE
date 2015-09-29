@@ -18,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -55,7 +54,7 @@ public class RoundController implements Initializable {
     @FXML
     private Button continueButton;
 
-    private int current;
+   // private int current = -1;
     private MapController mapController;
     private MuleGame muleGame;
     private Stage stage;
@@ -73,14 +72,21 @@ public class RoundController implements Initializable {
         this.muleGame = mulegame;
     }
 
-    public void setCurrent(int current) { this.current = current % muleGame.getPlayers().length; }
+   // public void setCurrent(int current) { this.current = current % muleGame.getPlayers().length; }
 
     public void start() {
-        muleGame.arrangePlayers();
+
+        if (!muleGame.selectionRound) {
+            System.out.println("It is " + muleGame.getPlayers()[muleGame.getCurrentPlayer()].toString() + "'s turn!");
+            muleGame.setTimeForTurn(muleGame.getPlayers()[muleGame.getCurrentPlayer()].calculateTimeForTurn(muleGame.getRound()));
+        } else {
+            System.out.println("Next is a land selection");
+            muleGame.arrangePlayers();
+        }
        //Image human = new Image(".." + File.separator + ".." + File.separator + "resources" + File.separator + "images" + File.separator + "human.jpg");
-        Image human = new Image("/resources/images/human.jpg");
-        Image flapper = new Image("/resources/images/flapper.jpg");
-        Image other = new Image("/resources/images/other.gif");
+        Image human = new Image("/images/human.jpg");
+        Image flapper = new Image("/images/flapper.jpg");
+        Image other = new Image("/images/other.gif");
         roundNumber.setText("ROUND: " + Integer.toString(muleGame.getRound()));
         ImageView[] images = {p1Image, p2Image, p3Image, p4Image};
         Player[] players = muleGame.getPlayers();
@@ -100,7 +106,7 @@ public class RoundController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Java/Map.fxml"));
+                loader.setLocation(getClass().getResource("/fxml/Map.fxml"));
                 try {
                     loader.load();
                 } catch (IOException e) {
