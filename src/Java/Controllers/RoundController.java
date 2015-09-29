@@ -76,11 +76,12 @@ public class RoundController implements Initializable {
 
     public void start() {
 
-        muleGame.arrangePlayers();
         if (!muleGame.selectionRound) {
             System.out.println("It is " + muleGame.getPlayers()[muleGame.getCurrentPlayer()].toString() + "'s turn!");
+            muleGame.setTimeForTurn(muleGame.getPlayers()[muleGame.getCurrentPlayer()].calculateTimeForTurn(muleGame.getRound()));
         } else {
             System.out.println("Next is a land selection");
+            muleGame.arrangePlayers();
         }
        //Image human = new Image(".." + File.separator + ".." + File.separator + "resources" + File.separator + "images" + File.separator + "human.jpg");
         Image human = new Image("/images/human.jpg");

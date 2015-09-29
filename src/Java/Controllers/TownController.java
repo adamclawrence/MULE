@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class TownController implements Initializable {
     @FXML
-    private Button pub_button;
+    public Button pub_button;
 
     @FXML
     private Button assay_office_button;
@@ -102,6 +102,7 @@ public class TownController implements Initializable {
                     if (muleGame.getCurrentPlayer() == (muleGame.getPlayers().length - 1)) {
                         muleGame.setCurrentPlayer(0);
                         muleGame.selectionRound = true;
+                        muleGame.incRound();
                     } else {
                         muleGame.incCurrentPlayer();
                     }

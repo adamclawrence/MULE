@@ -153,6 +153,8 @@ public class MapController implements Initializable {
         } else {
             currentPlayerLabel.setText("TURN: " + muleGame.getPlayers()[selectingPlayer].getName()
                     + " Money Remaining: " + muleGame.getPlayers()[selectingPlayer].getMoney());
+            System.out.println("Start TIMER");
+            muleGame.startTimer(muleGame.getTimeForTurn());
         }
 
     }
@@ -172,7 +174,6 @@ public class MapController implements Initializable {
             selectingPlayer = 0;
             if (numSkipped == muleGame.getPlayers().length) {
                 System.out.println("ALL SKIPPED END SELECTION PHASE!");
-                muleGame.incRound();
                 muleGame.selectionRound = false;
                 try {
                     FXMLLoader loader = new FXMLLoader();
