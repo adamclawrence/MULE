@@ -87,7 +87,8 @@ public class TownController implements Initializable {
         pub_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            Pub p = new Pub();
+                muleGame.t.cancel();
+                Pub p = new Pub();
                 int bonus = p.gamble(10, 2);
                 System.out.println(bonus);
                 try {
@@ -114,7 +115,6 @@ public class TownController implements Initializable {
                 } catch (Exception e) {
                     System.out.println(e + "THERE WAS AN ERROR WITH THE LOADER");
                 }
-
             }
         });
     }

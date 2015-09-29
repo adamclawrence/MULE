@@ -17,7 +17,8 @@ public class MuleGame {
     public JayLayer sound;
     public int currentPlayer = 0;
     private int timeForTurn = 0;
-    private int timeRemaining = 0;
+    public int timeRemaining = 0;
+    public Timer t;
 
     public MuleGame(String difficulty, Map map, Player[] players, JayLayer sound ) {
         this.difficulty = difficulty;
@@ -107,32 +108,32 @@ public class MuleGame {
         players[players.length - 1].setIsLast(true);
     }
 
-    public void startTimer(int turnTime) {
-        timeRemaining = turnTime;
-        System.out.println(timeRemaining);
-        Timer t = new Timer();
-        t.scheduleAtFixedRate(
-                new TimerTask()
-                {
-                    public void run()
-                    {
-                        timeRemaining--;
-                        System.out.println(timeRemaining);
-                        if (timeRemaining == 0) {
-                            System.out.print("TURN ENDED");
-                            //----- we can update a label every second------
-                            //label.update();
-                            //---------------
-
-                            //Here we need to basically hit the pub button
-                            //but dont add any money to the player
-                            t.cancel();
-                        }
-                    }
-                },
-                1000,      // run first occurrence immediately
-                1000);  // run every one seconds
-
-    }
+//    public void startTimer(int turnTime) {
+//        timeRemaining = turnTime;
+//        System.out.println(timeRemaining);
+//        Timer t = new Timer();
+//        t.scheduleAtFixedRate(
+//                new TimerTask()
+//                {
+//                    public void run()
+//                    {
+//                        timeRemaining--;
+//                        System.out.println(timeRemaining);
+//                        if (timeRemaining == 0) {
+//                            System.out.print("TURN ENDED");
+//                            //----- we can update a label every second------
+//                            //label.update();
+//                            //---------------
+//
+//                            //Here we need to basically hit the pub button
+//                            //but dont add any money to the player
+//                            t.cancel();
+//                        }
+//                    }
+//                },
+//                1000,      // run first occurrence after 1 second
+//                1000);  // run every one seconds
+//
+//    }
 
 }
