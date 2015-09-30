@@ -14,7 +14,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -32,7 +36,7 @@ public class TownController implements Initializable {
     private Button land_office_button;
 
     @FXML
-    private Button shop_button;
+    private Button store_button;
 
     @FXML
     private Button back_button;
@@ -117,6 +121,26 @@ public class TownController implements Initializable {
                 } catch (Exception e) {
                     System.out.println(e + "THERE WAS AN ERROR WITH THE LOADER");
                 }
+            }
+        });
+
+        store_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                            try {
+                                FXMLLoader loader = new FXMLLoader();
+                                loader.setLocation(getClass().getResource("/fxml/Store.fxml"));
+                                loader.load();
+                                Parent p = loader.getRoot();
+                                //((Node)event.getSource()).getScene().getWindow();
+                                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                stage.setScene(new Scene(p));
+                                TownController townController = loader.getController();
+                                townController.start(mapController, muleGame, stage);
+                                stage.show();
+                            } catch (Exception e) {
+                                System.out.println(e + "THERE WAS AN ERROR WITH THE LOADER");
+                            }
             }
         });
     }
