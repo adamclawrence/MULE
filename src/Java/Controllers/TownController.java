@@ -89,8 +89,10 @@ public class TownController implements Initializable {
             public void handle(MouseEvent event) {
                 muleGame.t.cancel();
                 Pub p = new Pub();
-                int bonus = p.gamble(10, 2);
-                System.out.println(bonus);
+                System.out.println(muleGame.timeRemaining);
+                int bonus = p.gamble(muleGame.timeRemaining, muleGame.getRound());
+                muleGame.getPlayers()[muleGame.getCurrentPlayer()].addMoney(bonus);
+                System.out.println("Gambled for: " + bonus);
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/fxml/Round.fxml"));

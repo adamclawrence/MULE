@@ -1,6 +1,9 @@
 package Java.Objects;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.Map;
 
 /**
  * Created by AveryDingler on 9/8/15.
@@ -17,6 +20,24 @@ public class Player {
     public int landCounter;
     private int score;
     private boolean isLast;
+    private int numberOfMules;
+    private static final Map<Integer, Integer> foodRequirements;
+    static {
+        Map<Integer, Integer> aMap = new HashMap<>();
+        aMap.put(1, 3);
+        aMap.put(2, 3);
+        aMap.put(3, 3);
+        aMap.put(4, 3);
+        aMap.put(5, 4);
+        aMap.put(6, 4);
+        aMap.put(7, 4);
+        aMap.put(8, 4);
+        aMap.put(9, 5);
+        aMap.put(10, 5);
+        aMap.put(11, 5);
+        aMap.put(12, 5);
+        foodRequirements = Collections.unmodifiableMap(aMap);
+    }
 
     //beginner
     //standard
@@ -123,6 +144,16 @@ public class Player {
         return score;
     }
 
+    public int getNumberOfMules() {
+        return numberOfMules;
+    }
+
+    public void setNumberOfMules(int numberOfMules) {
+        this.numberOfMules = numberOfMules;
+    }
+
+    public void incNumberOfMules() { numberOfMules++; }
+
     public boolean getIsLast() {
         return isLast;
     }
@@ -131,8 +162,20 @@ public class Player {
         isLast = value;
     }
 
+    public void addMoney(int money) {
+        this.money += money;
+    }
+
     public int calculateTimeForTurn(int round) {
-        //change this to be an actual calculation of the time
-        return 10;
+        if (food <= 0) {
+            return 5;
+        } else {
+            if (food >= foodRequirements.get(round) && energy >= numberOfMules) {
+                return 10;
+                //return 50; need for demo tomorrow
+            } else {
+                return 30;
+            }
+        }
     }
 }
