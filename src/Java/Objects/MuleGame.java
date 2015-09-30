@@ -33,6 +33,7 @@ public class MuleGame {
     public void setTimeForTurn(int time) {
         this.timeForTurn = time;
     }
+
     public Player[] getPlayers() {
         return players;
     }
@@ -83,7 +84,7 @@ public class MuleGame {
     }
 
     public void incCurrentPlayer() {
-        currentPlayer += 1;
+        currentPlayer++;
     }
 
     public void setCurrentPlayer(int currentPlayer) {
