@@ -84,10 +84,8 @@ public class StoreController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 FXMLLoader loader = new FXMLLoader();
-                System.out.println("Am I working?");
                 loader.setLocation(getClass().getResource("/fxml/Map.fxml"));
                 try {
-                    System.out.println("Am I working?");
                     loader.load();
                     Parent p = loader.getRoot();
                     ((Node) event.getSource()).getScene().getWindow();
@@ -97,7 +95,25 @@ public class StoreController implements Initializable {
                     mapController.setStage(stage);
                     mapController.start();
                     stage.show();
-                    System.out.println("CANNOT GO BACK");
+                } catch (Exception e) {
+                }
+
+            }
+        });
+        town_menu_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/Map.fxml"));
+                try {
+                    loader.load();
+                    Parent p = loader.getRoot();
+                    ((Node) event.getSource()).getScene().getWindow();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(p));
+                    TownController townController = loader.getController();
+                    townController.start(mapController, muleGame, stage);
+                    stage.show();
                 } catch (Exception e) {
                 }
 
